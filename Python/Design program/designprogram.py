@@ -1,3 +1,4 @@
+import random
 from turtle import *
 def r(x,y):
     rt(x)
