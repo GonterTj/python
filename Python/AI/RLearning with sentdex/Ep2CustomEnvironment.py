@@ -147,7 +147,7 @@ for episode in range(HM_EPISODES):
             if cv2.waitKey(500) & 0xFF == ord("q"):
                 break
         else:
-            if cv2.waitKey(10) & 0xFF == ord("q"):
+            if cv2.waitKey(1) & 0xFF == ord("q"):
                 break
 
         episode_reward += reward
