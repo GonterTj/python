@@ -60,9 +60,9 @@ class Blob:
             self.x += x
 
         if not y:
-            self.x += np.random.randint(-1,-2)
+            self.y += np.random.randint(-1,-2)
         else:
-            self.x += y
+            self.y += y
 
         if self.x < 0:
             self.x = 0
@@ -80,7 +80,7 @@ if start_q_table is None:
         for y1 in range(-SIZE+1, SIZE):
             for x2 in range(-SIZE+1, SIZE):
                 for y2 in range(-SIZE+1, SIZE):
-                    q_table[((x1, y1), (x2, y2))] = []
+                    q_table[((x1, y1), (x2, y2))] = [np.random.uniform(-5,0) for i in range(4)] #bastard D:::::::::::
 else:
     with open(start_q_table, "rb") as f:
         q_table = pickle.load(f)
@@ -144,17 +144,17 @@ for episode in range(HM_EPISODES):
         img = img.resize((300,300))
         cv2.imshow("uhm", np.array(img))
         if reward == FOOD_REWARD or reward == -ENEMY_PENALTY:
-            if cv2.waitkey(500) & 0xFF == ord("q"):
+            if cv2.waitKey(500) & 0xFF == ord("q"):
                 break
         else:
-            if cv2.waitkey(1) & 0xFF == ord("q"):
+            if cv2.waitKey(10) & 0xFF == ord("q"):
                 break
 
         episode_reward += reward
         if reward == FOOD_REWARD or reward == -ENEMY_PENALTY:
             break
 
-    episode_reward.append(episode_reward)
+    episode_rewards.append(episode_reward)
     epsilon *= EPS_DECAY
 
 moving_avg = np.convolve(episode_rewards, np.ones((SHOW_EVERY,)) / SHOW_EVERY, mode="valid")
