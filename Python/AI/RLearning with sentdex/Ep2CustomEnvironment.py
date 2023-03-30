@@ -141,8 +141,8 @@ for episode in range(HM_EPISODES):
             env[enemy.y][enemy.x] = d[ENEMY_N]
 
         img = Image.fromarray(env, "RGB")
-        img = img.resize((300,300))
-        cv2.imshow("uhm", np.array(img))
+        img = img.resize((300,300), resample=Image.BOX)
+        cv2.imshow("", np.array(img))
         if reward == FOOD_REWARD or reward == -ENEMY_PENALTY:
             if cv2.waitKey(500) & 0xFF == ord("q"):
                 break
